@@ -17,26 +17,31 @@
   </section>
 
   <!-- Game -->
-  <section id="screen-game" class="screen">
-    <div class="stage-wrap">
-      <!-- In-game HUD overlay -->
-      <div class="overlay-hud" aria-hidden="true">
-        <div class="hud-pill"><span>Time:</span><strong id="hudTime">0.00s</strong></div>
-        <div class="hud-pill"><span>Jugs:</span><strong id="hudJugs">0</strong></div>
-      </div>
-
-      <canvas id="stage" width="480" height="720"></canvas>
-      <div id="toast" class="toast" aria-live="polite"></div>
-
-      <!-- Game instructions -->
-      <div id="instructions" class="game-instructions">
-        <p><strong>Use Arrow Keys</strong> to move left, right, up, and down.</p>
-        <p>Collect <img src="assets/jerry_jug_yellow.svg" alt="Yellow jug" class="jug-icon jug-yellow"> to reduce time.</p>
-        <p>Avoid <img src="assets/jerry_jug_black.svg" alt="Black jug" class="jug-icon jug-black"> — they add time.</p>
-        <p>Press any arrow key to <strong>start</strong> the run!</p>
-      </div>
+ <section id="screen-game" class="screen">
+  <div class="stage-wrap">
+    <div class="overlay-hud" aria-hidden="true">
+      <div class="hud-pill"><span>Time:</span><strong id="hudTime">0.00s</strong></div>
+      <div class="hud-pill"><span>Jugs:</span><strong id="hudJugs">0</strong></div>
     </div>
-  </section>
+
+    <!-- In-game controls (clickable) -->
+    <div class="overlay-ctrl" aria-label="in-game controls">
+      <button id="btnResetInGame" class="btn btn-ghost btn-small" type="button">Reset</button>
+    </div>
+
+    <canvas id="stage" width="480" height="720"></canvas>
+    <div id="toast" class="toast" aria-live="polite"></div>
+
+    <!-- Game instructions -->
+    <div id="instructions" class="game-instructions">
+      <p><strong>Use Arrow Keys</strong> to move left, right, up, and down.</p>
+      <p>Collect <img src="assets/jerry_jug_yellow.svg" alt="Yellow jug" class="jug-icon jug-yellow"> to reduce time.</p>
+      <p>Avoid <img src="assets/jerry_jug_black.svg" alt="Black jug" class="jug-icon jug-black"> — they add time.</p>
+      <p>Press any arrow key to <strong>start</strong> the run!</p>
+    </div>
+  </div>
+</section>
+
 
   <!-- Finish -->
   <section id="screen-over" class="screen">

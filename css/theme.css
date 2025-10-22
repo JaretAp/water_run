@@ -191,7 +191,7 @@ body{
 #screen-over{
   background:
     url("../assets/jerry_jug_yellow.svg") 10% 20% / 64px no-repeat,
-    url("../assets/jerry_jug_black.svg") 86% 78% / 64px no-repeat,
+    url("../assets/jerry_jug-black.svg") 86% 78% / 64px no-repeat,
     var(--blue-bg);
 }
 
@@ -199,4 +199,28 @@ body{
 @media (max-width:420px){
   .panel{ padding:22px 18px; }
   .btn{ padding:12px 18px; }
+}
+
+/* In-game controls overlay (clickable) */
+.overlay-ctrl{
+  position:absolute;
+  bottom:8px;   /* moved from top to bottom */
+  right:10px;
+  z-index:6;
+  pointer-events:auto; /* must be clickable (overlay-hud uses none) */
+}
+
+
+.btn-ghost{
+  background: rgba(12,14,15,0.35);
+  color: #fff;
+  border: 2px solid rgba(255,216,77,0.85);
+}
+.btn-ghost:hover{ filter:brightness(1.08); }
+
+.btn-small{
+  padding: 8px 12px;
+  min-width: auto;
+  font-size: .95rem;
+  border-radius: 10px;
 }

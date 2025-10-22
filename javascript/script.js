@@ -86,7 +86,7 @@ let imgJugBlack  = null;
 
 (async function preloadAssets(){
   try{ imgJugYellow = await loadImage('assets/jerry_jug_yellow.svg'); } catch(e){ console.error('yellow failed'); }
-  try{ imgJugBlack  = await loadImage('assets/jerry_jug_black.svg');  } catch(e){ console.error('black failed'); }
+  try{ imgJugBlack  = await loadImage('assets/jerry_jug-black.svg');  } catch(e){ console.error('black failed'); }
 })();
 
 /* World */
@@ -319,6 +319,15 @@ btnReset     && btnReset.addEventListener('click', () => {
   resetGame();
   showScreen(screenStart);
 });
+
+btnResetInGame && btnResetInGame.addEventListener('click', () => {
+  // stop play immediately
+  playing = false;
+  // return to Start screen (clean slate)
+  resetGame();
+  showScreen(screenStart);
+});
+
 
 /* Init */
 (function init(){
