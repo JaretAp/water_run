@@ -18,20 +18,19 @@
   </section>
 
   <!-- Game -->
-  <section id="screen-game" class="screen">
-    <header class="hud">
-      <div>Time: <span id="time">0.00</span>s</div>
-      <div>Jugs: <span id="jugs">0</span></div>
-      <div class="controls">
-        <button id="btnReset" class="btn btn-outline">Reset</button>
-      </div>
-    </header>
-
-    <div class="stage-wrap">
-      <canvas id="stage" width="480" height="720"></canvas>
-      <div id="toast" class="toast" aria-live="polite"></div>
+ <section id="screen-game" class="screen">
+  <div class="stage-wrap">
+    <!-- In-game HUD overlay -->
+    <div class="overlay-hud" aria-hidden="true">
+      <div class="hud-pill"><span>Time:</span><strong id="hudTime">0.00s</strong></div>
+      <div class="hud-pill"><span>Jugs:</span><strong id="hudJugs">0</strong></div>
     </div>
-  </section>
+
+    <canvas id="stage" width="480" height="720"></canvas>
+    <div id="toast" class="toast" aria-live="polite"></div>
+  </div>
+</section>
+
 
   <!-- Game Over -->
   <section id="screen-over" class="screen">

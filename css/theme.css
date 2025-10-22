@@ -36,24 +36,50 @@ body{
 }
 
 /* --- Panels (Start / Finish screens) --- */
-.panel{
-  background: var(--blue-bg);
+.panel {
+  background: transparent;
   color: var(--black-accent);
-  border: none;
-  border-radius: var(--radius-lg);
-  max-width: 640px;
-  width: min(92vw, 640px);
-  padding: 28px 24px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.08);
   text-align: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
 }
-.panel h1{
+
+.panel h1,
+.panel h2 {
   font-family: var(--font-display);
-  font-size: clamp(32px, 4vw, 46px);
+  font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 800;
-  margin: 0 0 10px;
-  text-shadow: 0 2px 4px rgba(0,0,0,.15);
+  margin: 0;
 }
+
+.panel p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  max-width: 600px;
+  color: var(--yellow-jug);
+  line-height: 1.5;
+}
+
+.panel .btn {
+  margin-top: 1rem;
+  background: var(--dark-obst);
+  color: var(--yellow-jug);
+  border-radius: var(--radius-sm);
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+}
+.panel .btn:hover {
+  filter: brightness(1.1);
+}
+
 .tagline{
   margin: 0 0 18px;
   font-style: italic;
@@ -181,4 +207,33 @@ body{
   .panel{ padding: 22px 18px; }
   .hud{ padding: 8px 10px; }
   .btn{ padding: 10px 16px; }
+}
+
+/* === In-game overlay HUD (inside stage) === */
+.overlay-hud{
+  position: absolute;
+  top: 8px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  z-index: 3;
+  pointer-events: none; /* clicks go to canvas */
+}
+
+.hud-pill{
+  background: rgba(12,14,15,0.55); /* dark with alpha */
+  color: #fff;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 6px 10px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.hud-pill strong{
+  color: var(--yellow-jug);
+  font-variant-numeric: tabular-nums;
 }
