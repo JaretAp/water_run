@@ -41,6 +41,36 @@ let jugCount = 0;
 // Utility
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
+// ---------- ASSET PRELOAD (robust & safe fallback) ----------
+function loadImage(src) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = () => reject(new Error("Image failed: " + src));
+    img.src = src; // relative to index.html at project root
+  });
+}
+
+let imgJugYellow = null;
+let imgJugBlack  = null;
+let assetsReady  = false;
+
+(async function preloadAssets() {
+  try {
+    const [yellow, black] = await Promise.all([
+      loadImage("assets/jerry_jug_yellow.svg"),
+      loadImage("assets/jerry_jug_black.svg"),
+    ]);
+    imgJugYellow = yellow;
+    imgJugBlack  = black;
+    assetsReady  = true;
+    console.log("[assets] SVGs loaded");
+  } catch (err) {
+    console.error("[assets] load error:", err.message);
+    // Keep assetsReady=false so the fallback shapes render instead of blank
+  }
+})();
+
 function showScreen(el){
   [screenStart, screenGame, screenOver].forEach(s => s.classList.remove('show'));
   el.classList.add('show');
@@ -174,19 +204,43 @@ function drawRunner(){
   ctx.arc(x, yS-40, 12, 0, Math.PI*2); ctx.fill();
 }
 
-function drawJug(it){
+// ~40x48 matches your mockup proportions; tweak if desired
+const SPRITE_W = 40, SPRITE_H = 48;
+
+function drawJug(it) {
   const yS = worldToScreenY(it.y);
-  ctx.save(); ctx.translate(it.x, yS);
-  ctx.fillStyle = '#ffd84d'; ctx.fillRect(-16, -22, 32, 44);
-  ctx.fillStyle = '#bda10d'; ctx.fillRect(-6, -26, 12, 6);
-  ctx.restore();
+
+  if (!assetsReady || !imgJugYellow) {
+    // Fallback (old look) so gameplay never blocks
+    ctx.save();
+    ctx.translate(it.x, yS);
+    ctx.fillStyle = "#FFD84D"; // yellow jug body
+    ctx.fillRect(-16, -22, 32, 44);
+    ctx.fillStyle = "#bda10d"; // cap
+    ctx.fillRect(-6, -26, 12, 6);
+    ctx.restore();
+    return;
+  }
+
+  ctx.drawImage(imgJugYellow, it.x - SPRITE_W/2, yS - SPRITE_H/2, SPRITE_W, SPRITE_H);
 }
-function drawHazard(it){
+
+function drawHazard(it) {
   const yS = worldToScreenY(it.y);
-  ctx.save(); ctx.translate(it.x, yS);
-  ctx.fillStyle = '#64748b'; ctx.fillRect(-it.w/2, -it.h/2, it.w, it.h);
-  ctx.restore();
+
+  if (!assetsReady || !imgJugBlack) {
+    // Fallback (old block) for reliability
+    ctx.save();
+    ctx.translate(it.x, yS);
+    ctx.fillStyle = "#253331"; // dark obstacle
+    ctx.fillRect(-it.w/2, -it.h/2, it.w, it.h);
+    ctx.restore();
+    return;
+  }
+
+  ctx.drawImage(imgJugBlack, it.x - SPRITE_W/2, yS - SPRITE_H/2, SPRITE_W, SPRITE_H);
 }
+
 
 // ===== Main loop =====
 function loop(ts){
