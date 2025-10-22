@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Water Run — charity: water</title>
-  <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/theme.css" />
 </head>
 <body>
@@ -13,26 +12,33 @@
     <div class="panel">
       <h1>Water Run</h1>
       <p class="tagline">Race to the finish. Collect yellow jugs to reduce time. Avoid hazards that add time.</p>
-      <button id="btnStart" class="btn">Start</button>
+      <button id="btnStart" class="btn">Start Game!</button>
     </div>
   </section>
 
   <!-- Game -->
- <section id="screen-game" class="screen">
-  <div class="stage-wrap">
-    <!-- In-game HUD overlay -->
-    <div class="overlay-hud" aria-hidden="true">
-      <div class="hud-pill"><span>Time:</span><strong id="hudTime">0.00s</strong></div>
-      <div class="hud-pill"><span>Jugs:</span><strong id="hudJugs">0</strong></div>
+  <section id="screen-game" class="screen">
+    <div class="stage-wrap">
+      <!-- In-game HUD overlay -->
+      <div class="overlay-hud" aria-hidden="true">
+        <div class="hud-pill"><span>Time:</span><strong id="hudTime">0.00s</strong></div>
+        <div class="hud-pill"><span>Jugs:</span><strong id="hudJugs">0</strong></div>
+      </div>
+
+      <canvas id="stage" width="480" height="720"></canvas>
+      <div id="toast" class="toast" aria-live="polite"></div>
+
+      <!-- Game instructions -->
+      <div id="instructions" class="game-instructions">
+        <p><strong>Use Arrow Keys</strong> to move left, right, up, and down.</p>
+        <p>Collect <img src="assets/jerry_jug_yellow.svg" alt="Yellow jug" class="jug-icon jug-yellow"> to reduce time.</p>
+        <p>Avoid <img src="assets/jerry_jug_black.svg" alt="Black jug" class="jug-icon jug-black"> — they add time.</p>
+        <p>Press any arrow key to <strong>start</strong> the run!</p>
+      </div>
     </div>
+  </section>
 
-    <canvas id="stage" width="480" height="720"></canvas>
-    <div id="toast" class="toast" aria-live="polite"></div>
-  </div>
-</section>
-
-
-  <!-- Game Over -->
+  <!-- Finish -->
   <section id="screen-over" class="screen">
     <div class="panel">
       <h2>Finish!</h2>
@@ -43,7 +49,7 @@
   </section>
 
   <footer class="footer">
-    <small>Prototype aligned to your Water Run concept and project brief. :contentReference[oaicite:2]{index=2}:contentReference[oaicite:3]{index=3}</small>
+    <small>Prototype aligned to your Water Run concept.</small>
   </footer>
 
   <script src="javascript/script.js"></script>

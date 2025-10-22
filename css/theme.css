@@ -1,17 +1,16 @@
 /* =========================================
-   Water Run — theme.css (complete, fresh)
-   Uses Figma palette; safe screen toggles
+   Water Run — theme.css (single-source styles)
    ========================================= */
 
-/* --- Brand tokens (from your mockup) --- */
+/* Brand tokens */
 :root{
-  --blue-bg:      #2FA9FF; /* side panels / HUD background */
+  --blue-bg:      #2FA9FF; /* page bg */
   --green-field:  #2D9B4B; /* playfield */
-  --dark-obst:    #253331; /* obstacles / button bg */
-  --yellow-jug:   #FFD84D; /* jug / button text */
-  --black-accent: #0C0E0F; /* dark icons/text */
-  --hud-light:    #A7D0EE; /* HUD accent bar */
-  --error-red:    #FF585D; /* Finish / Game Over */
+  --dark-obst:    #253331; /* dark elements */
+  --yellow-jug:   #FFD84D; /* accent */
+  --black-accent: #0C0E0F;
+  --hud-light:    #A7D0EE;
+  --error-red:    #FF585D;
 
   --font-display: "Inter", "Segoe UI", system-ui, sans-serif;
   --font-body:    "Inter", "Segoe UI", system-ui, sans-serif;
@@ -20,180 +19,174 @@
   --radius-sm: 12px;
 }
 
-/* --- CRITICAL: visibility must match JS --- */
-.screen { display: none !important; }
-.screen.show { display: flex !important; }
+/* Screen visibility (must match JS) */
+.screen{ display:none !important; min-height:100vh; align-items:center; justify-content:center; padding:20px; }
+.screen.show{ display:flex !important; }
 
-/* --- Global --- */
-html, body { height: 100%; }
+/* Global */
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
 body{
-  margin: 0;
-  background: var(--blue-bg);
-  color: var(--black-accent);
-  font-family: var(--font-body);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  margin:0;
+  background:var(--blue-bg);
+  color:var(--black-accent);
+  font-family:var(--font-body);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
 }
 
-/* --- Panels (Start / Finish screens) --- */
-.panel {
-  background: transparent;
-  color: var(--black-accent);
-  text-align: center;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1.2rem;
+/* Panels (Start / Finish) */
+.panel{
+  background:transparent;
+  color:var(--black-accent);
+  text-align:center;
+  width:100%;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:1.2rem;
 }
-
 .panel h1,
-.panel h2 {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 800;
-  margin: 0;
+.panel h2{
+  font-family:var(--font-display);
+  font-size:clamp(2.4rem,6vw,3.6rem);
+  font-weight:800;
+  margin:0 0 .3rem 0;
+  text-shadow:0 2px 4px rgba(0,0,0,.15);
 }
-
-.panel p {
-  font-size: 1.1rem;
-  font-weight: 600;
-  max-width: 600px;
-  color: var(--yellow-jug);
-  line-height: 1.5;
-}
-
-.panel .btn {
-  margin-top: 1rem;
-  background: var(--dark-obst);
-  color: var(--yellow-jug);
-  border-radius: var(--radius-sm);
-  padding: 14px 28px;
-  font-size: 1.1rem;
-  font-weight: 700;
-  cursor: pointer;
-  border: none;
-}
-.panel .btn:hover {
-  filter: brightness(1.1);
-}
-
 .tagline{
-  margin: 0 0 18px;
-  font-style: italic;
-  opacity: .9;
+  font-size:1.1rem;
+  font-weight:600;
+  color:var(--yellow-jug);
+  font-style:italic;
+  text-shadow:0 1px 2px rgba(0,0,0,.25);
+  margin:0 0 18px;
 }
 
-/* --- Buttons --- */
+/* Buttons */
 .btn{
-  background: var(--dark-obst);
-  color: var(--yellow-jug);
-  border: 0;
-  border-radius: var(--radius-sm);
-  padding: 12px 20px;
-  font-weight: 800;
-  cursor: pointer;
-  transition: filter .15s ease;
+  background:var(--dark-obst);
+  color:var(--yellow-jug);
+  border:0;
+  border-radius:12px;
+  padding:14px 28px;
+  font-weight:800;
+  font-size:1.1rem;
+  min-width:180px;
+  cursor:pointer;
+  transition:filter .15s ease;
 }
-.btn:hover{ filter: brightness(1.06); }
-.btn:disabled{ opacity: .6; cursor: not-allowed; }
-.btn.btn-outline{
-  background: transparent;
-  color: var(--dark-obst);
-  border: 2px solid var(--yellow-jug);
-}
+.btn:hover{ filter:brightness(1.08); }
+.btn:disabled{ opacity:.6; cursor:not-allowed; }
 
-/* --- HUD (top bar on Game screen) --- */
-.hud{
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  background: var(--blue-bg);
-  color: var(--black-accent);
-  border-bottom: 3px solid var(--dark-obst);
-  padding: 10px 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-weight: 700;
-}
-.hud > div{
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.hud::after{
-  content: "";
-  position: absolute;
-  left: 0; bottom: -4px;
-  width: 100%; height: 6px;
-  background: var(--hud-light);
-  pointer-events: none;
-}
-
-/* --- Stage frame + canvas --- */
+/* Stage frame + canvas */
 .stage-wrap{
-  margin: 18px auto;
-  width: min(95vw, 540px);
-  aspect-ratio: 2 / 3;
-  background: var(--green-field);
-  border: 4px solid var(--dark-obst);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0,0,0,.25);
-  position: relative; /* for toast positioning */
+  margin:18px auto;
+  width:min(95vw,540px);
+  aspect-ratio:2/3;
+  background:var(--green-field);
+  border:4px solid var(--dark-obst);
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  box-shadow:0 8px 24px rgba(0,0,0,.25);
+  position:relative;
 }
 #stage{
-  width: 100%;
-  height: 100%;
-  display: block;
-  background: var(--green-field);
+  width:100%;
+  height:100%;
+  display:block;
+  background:var(--green-field);
 }
 
-/* --- Toast feedback text (center-top over canvas) --- */
+/* HUD overlay inside stage */
+.overlay-hud{
+  position:absolute;
+  top:8px;
+  left:0;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  padding:0 10px;
+  z-index:3;
+  pointer-events:none;
+}
+.hud-pill{
+  background:rgba(12,14,15,0.55);
+  color:#fff;
+  font-weight:700;
+  border-radius:12px;
+  padding:6px 10px;
+  display:flex;
+  gap:6px;
+  align-items:center;
+}
+.hud-pill strong{
+  color:var(--yellow-jug);
+  font-variant-numeric:tabular-nums;
+}
+
+/* Toast feedback */
 .toast{
-  position: absolute;
-  left: 50%;
-  top: 14px;
-  transform: translateX(-50%);
-  color: #fff;
-  font-weight: 800;
-  text-shadow: 0 2px 4px rgba(0,0,0,.6);
-  opacity: 0;
-  transition: opacity .18s;
-  pointer-events: none;
+  position:absolute;
+  left:50%;
+  top:14px;
+  transform:translateX(-50%);
+  color:#fff;
+  font-weight:800;
+  text-shadow:0 2px 4px rgba(0,0,0,.6);
+  opacity:0;
+  transition:opacity .18s;
+  pointer-events:none;
 }
 
-/* --- Finish / Game Over styles --- */
+/* Instructions overlay */
+.game-instructions{
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%, -50%);
+  color:#fff;
+  text-align:center;
+  font-size:1rem;
+  line-height:1.5;
+  background:rgba(0,0,0,0.4);
+  padding:16px 24px;
+  border-radius:12px;
+  max-width:360px;
+  z-index:5;
+  transition:opacity .3s ease;
+}
+.game-instructions.hidden{ opacity:0; pointer-events:none; }
+
+.jug-icon{ width:20px; height:24px; vertical-align:-4px; margin:0 6px; }
+.jug-yellow{ filter:drop-shadow(0 0 3px #ffd84d); }
+.jug-black { filter:drop-shadow(0 0 3px #000); }
+
+/* Finish specifics */
 #screen-over h2{
-  color: var(--error-red);
-  font-size: clamp(24px, 3.2vw, 34px);
-  font-weight: 800;
-  margin: 0 0 8px;
+  color:var(--error-red);
 }
 #screen-over .scoreline{
-  font-weight: 800;
-  margin: 6px 0 12px;
+  font-weight:800;
+  margin:6px 0 12px;
 }
 #screen-over .msg{
-  color: var(--black-accent);
-  font-style: italic;
-  opacity: .9;
+  color:var(--black-accent);
+  font-style:italic;
+  opacity:.9;
 }
 
-/* --- Footer --- */
+/* Footer */
 .footer{
-  text-align: center;
-  color: var(--black-accent);
-  padding: 12px;
-  font-size: 0.9rem;
-  opacity: .9;
+  text-align:center;
+  color:var(--black-accent);
+  padding:12px;
+  font-size:.9rem;
+  opacity:.9;
 }
 
-/* --- Optional: jug watermark on Start/Finish screens ---
-   NOTE: paths are relative to /css/ → use ../assets/  */
+/* Optional jug watermark on Start/Finish (paths from /css/) */
 #screen-start,
 #screen-over{
   background:
@@ -202,38 +195,8 @@ body{
     var(--blue-bg);
 }
 
-/* --- Small screens tweaks --- */
-@media (max-width: 420px){
-  .panel{ padding: 22px 18px; }
-  .hud{ padding: 8px 10px; }
-  .btn{ padding: 10px 16px; }
-}
-
-/* === In-game overlay HUD (inside stage) === */
-.overlay-hud{
-  position: absolute;
-  top: 8px;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 10px;
-  z-index: 3;
-  pointer-events: none; /* clicks go to canvas */
-}
-
-.hud-pill{
-  background: rgba(12,14,15,0.55); /* dark with alpha */
-  color: #fff;
-  font-weight: 700;
-  border-radius: 12px;
-  padding: 6px 10px;
-  display: flex;
-  gap: 6px;
-  align-items: center;
-}
-
-.hud-pill strong{
-  color: var(--yellow-jug);
-  font-variant-numeric: tabular-nums;
+/* Small screens */
+@media (max-width:420px){
+  .panel{ padding:22px 18px; }
+  .btn{ padding:12px 18px; }
 }
