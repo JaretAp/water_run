@@ -224,3 +224,26 @@ body{
   font-size: .95rem;
   border-radius: 10px;
 }
+
+/* Touch support */
+#stage, .stage-wrap {
+  touch-action: none;            /* prevent scroll/zoom gestures */
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Invisible press zones (only show on touch devices) */
+.touch-zone {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  z-index: 6;
+  pointer-events: auto;
+}
+.touch-zone.up   { top: 0;    height: 48%; }
+.touch-zone.down { bottom: 0; height: 52%; }
+
+/* On non-touch devices, disable the zones */
+@media (hover: hover) and (pointer: fine) {
+  .touch-zone { display: none; }
+}

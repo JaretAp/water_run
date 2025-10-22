@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,6 +8,7 @@
   <link rel="stylesheet" href="css/style.css?v=3" />
   <link rel="stylesheet" href="css/theme.css?v=3" />
 </head>
+
 <body>
   <!-- Start -->
   <section id="screen-start" class="screen show">
@@ -18,30 +20,36 @@
   </section>
 
   <!-- Game -->
- <section id="screen-game" class="screen">
-  <div class="stage-wrap">
-    <div class="overlay-hud" aria-hidden="true">
-      <div class="hud-pill"><span>Time:</span><strong id="hudTime">0.00s</strong></div>
-      <div class="hud-pill"><span>Jugs:</span><strong id="hudJugs">0</strong></div>
-    </div>
+  <section id="screen-game" class="screen">
+    <div class="stage-wrap">
+      <div class="overlay-hud" aria-hidden="true">
+        <div class="hud-pill"><span>Time:</span><strong id="hudTime">0.00s</strong></div>
+        <div class="hud-pill"><span>Jugs:</span><strong id="hudJugs">0</strong></div>
+      </div>
 
-    <!-- In-game controls (clickable) -->
-    <div class="overlay-ctrl" aria-label="in-game controls">
-      <button id="btnResetInGame" class="btn btn-ghost btn-small" type="button">Reset</button>
-    </div>
+      <!-- In-game controls (clickable) -->
+      <div class="overlay-ctrl" aria-label="in-game controls">
+        <button id="btnResetInGame" class="btn btn-ghost btn-small" type="button">Reset</button>
+      </div>
 
-    <canvas id="stage" width="480" height="720"></canvas>
-    <div id="toast" class="toast" aria-live="polite"></div>
+      <!-- Touch zones for phones/tablets -->
+      <div id="touchUpZone" class="touch-zone up" aria-hidden="true"></div>
+      <div id="touchDownZone" class="touch-zone down" aria-hidden="true"></div>
 
-    <!-- Game instructions -->
-    <div id="instructions" class="game-instructions">
-      <p><strong>Use Arrow Keys</strong> to move left, right, up, and down.</p>
-      <p>Collect <img src="assets/jerry_jug_yellow.svg" alt="Yellow jug" class="jug-icon jug-yellow"> to reduce time.</p>
-      <p>Avoid <img src="assets/jerry_jug_black.svg" alt="Black jug" class="jug-icon jug-black"> — they add time.</p>
-      <p>Press any arrow key to <strong>start</strong> the run!</p>
+      <canvas id="stage" width="480" height="720"></canvas>
+
+      <div id="toast" class="toast" aria-live="polite"></div>
+
+      <!-- Game instructions -->
+      <div id="instructions" class="game-instructions">
+        <p><strong>Use Arrow Keys</strong> to move left, right, up, and down.</p>
+        <p>Collect <img src="assets/jerry_jug_yellow.svg" alt="Yellow jug" class="jug-icon jug-yellow"> to reduce time.
+        </p>
+        <p>Avoid <img src="assets/jerry_jug_black.svg" alt="Black jug" class="jug-icon jug-black"> — they add time.</p>
+        <p>Press any arrow key to <strong>start</strong> the run!</p>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
 
   <!-- Finish -->
@@ -60,4 +68,5 @@
 
   <script src="javascript/script.js?v=3"></script>
 </body>
+
 </html>

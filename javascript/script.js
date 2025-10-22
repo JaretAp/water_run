@@ -24,6 +24,10 @@ const hudJugsEl = document.getElementById('hudJugs');
 
 const instructionsEl = document.getElementById('instructions');
 
+const upZone   = document.getElementById('touchUpZone');
+const downZone = document.getElementById('touchDownZone');
+
+
 const canvas = document.getElementById('stage');
 const ctx    = canvas.getContext('2d');
 
@@ -183,6 +187,19 @@ function resetGame(){
 
   document.querySelectorAll('.confetti').forEach(n => n.remove());
 }
+
+function beginIfArmedAndTouch(direction /* 'up'|'down'|null */) {
+  if (!gameArmed) return;
+  gameArmed = false;
+  playing = true;
+  lastTs = 0;
+  if (direction === 'up')   upHeld = true;
+  if (direction === 'down') downHeld = true;
+  if (instructionsEl) instructionsEl.classList.add('hidden');
+  requestAnimationFrame(loop);
+}
+
+
 function startGame(){
   resetGame();
   showScreen(screenGame);
@@ -298,19 +315,49 @@ window.addEventListener('keyup', (e) => {
 });
 
 /* Touch (swipe lanes only) */
+// Touch (swipe lanes + hold zones for up/down)
 let touchSX=null, touchSY=null;
+
 canvas.addEventListener('touchstart', (e) => {
+  // If armed, a first touch on canvas just starts (no movement)
+  if (gameArmed) {
+    beginIfArmedAndTouch(null);
+  }
   const t = e.changedTouches[0];
   touchSX = t.clientX; touchSY = t.clientY;
-}, { passive:true });
+  e.preventDefault();
+}, { passive:false });
+
 canvas.addEventListener('touchend', (e) => {
-  if (!playing || touchSX==null || touchSY==null) return;
-  const t = e.changedTouches[0];
+  if (!playing || touchSX==null || touchSY==null) { touchSX=touchSY=null; return; }
+  const t  = e.changedTouches[0];
   const dx = t.clientX - touchSX;
   if (dx < -20) lane = Math.max(0, lane - 1);
   if (dx >  20) lane = Math.min(2, lane + 1);
   touchSX = touchSY = null;
-});
+  e.preventDefault();
+}, { passive:false });
+
+// Press-and-hold zones for vertical movement
+function holdStart(direction){
+  if (gameArmed) beginIfArmedAndTouch(direction);
+  if (!playing) return;
+  if (direction === 'up')   upHeld = true;
+  if (direction === 'down') downHeld = true;
+}
+function holdEnd(direction){
+  if (direction === 'up')   upHeld = false;
+  if (direction === 'down') downHeld = false;
+}
+
+upZone && upZone.addEventListener('touchstart', (e) => { holdStart('up'); e.preventDefault(); }, { passive:false });
+upZone && upZone.addEventListener('touchend',   (e) => { holdEnd('up');   e.preventDefault(); }, { passive:false });
+upZone && upZone.addEventListener('touchcancel',(e) => { holdEnd('up');   e.preventDefault(); }, { passive:false });
+
+downZone && downZone.addEventListener('touchstart', (e) => { holdStart('down'); e.preventDefault(); }, { passive:false });
+downZone && downZone.addEventListener('touchend',   (e) => { holdEnd('down');   e.preventDefault(); }, { passive:false });
+downZone && downZone.addEventListener('touchcancel',(e) => { holdEnd('down');   e.preventDefault(); }, { passive:false });
+
 
 /* Buttons */
 btnStart     && btnStart.addEventListener('click', startGame);
