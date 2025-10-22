@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Water Run — charity: water</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+</head>
+<body>
+  <!-- Start -->
+  <section id="screen-start" class="screen show">
+    <div class="panel">
+      <h1>Water Run</h1>
+      <p class="tagline">Race to the finish. Collect yellow jugs to reduce time. Avoid hazards that add time.</p>
+      <button id="btnStart" class="btn">Start</button>
+    </div>
+  </section>
+
+  <!-- Game -->
+  <section id="screen-game" class="screen">
+    <header class="hud">
+      <div>Time: <span id="time">0.00</span>s</div>
+      <div>Jugs: <span id="jugs">0</span></div>
+      <div class="controls">
+        <button id="btnReset" class="btn btn-outline">Reset</button>
+      </div>
+    </header>
+
+    <div class="stage-wrap">
+      <canvas id="stage" width="480" height="720"></canvas>
+      <div id="toast" class="toast" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- Game Over -->
+  <section id="screen-over" class="screen">
+    <div class="panel">
+      <h2>Finish!</h2>
+      <p class="scoreline">Final Time: <span id="finalTime">0.00</span>s</p>
+      <p class="msg">Each jug helped lower your time. Hazards added seconds.</p>
+      <button id="btnPlayAgain" class="btn">Race again</button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <small>Prototype aligned to your Water Run concept and project brief. :contentReference[oaicite:2]{index=2}:contentReference[oaicite:3]{index=3}</small>
+  </footer>
+
+  <script src="javascript/script.js"></script>
+</body>
+</html>

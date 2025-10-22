@@ -1,0 +1,79 @@
+
+Water Run – Game Logic
+
+
+1. Game Start
+
+When the game loads, the Start Screen appears with the title “Water Run,” a subtitle (“Inspired by charity: water”), and a large Start Game! button.
+
+No gameplay elements are active yet.
+
+Once the user taps “Start Game!,” the game transitions to the Gameplay Screen, initializing score = 0, timer = full duration (e.g., 2 minutes), and player lives/jug slots.
+
+2. Player Actions
+
+Player can tap/hold left/right/up/down (or swipe) to move their runner character across the screen.
+
+The runner moves forward automatically but must be directed around obstacles and hazards.
+
+The player collects yellow jugs by colliding with them.
+
+If the player collides with a black shape (block), movement is blocked.
+
+If the player collides with a hazard (red/danger arrows or stars), they drop a jug they’re carrying or lose points/time.
+
+3. Game Logic
+
+The system continuously checks:
+
+Timer countdown (game ends when time hits zero).
+
+Collisions between the runner and:
+
+Yellow jug → increment jug count.
+
+Block (black rectangle/circle/triangle) → stop movement.
+
+Hazard (arrows/stars) → penalty (lose jug, lose life, or subtract score).
+
+Game updates player position, score, and timer every frame.
+
+4. Score/Feedback
+
+Score increases by +1 each time a jug is collected.
+
+Score decreases or jug count drops if the player hits a hazard.
+
+Timer bar and numbers decrease visually in real time.
+
+Feedback includes:
+
+Jug icon flashing when collected.
+
+Danger icon flashing when hit.
+
+Score counter and jug count updating in the HUD.
+
+5. Win or Lose Conditions
+
+Lose condition: Timer reaches 0, or player loses all jugs (depending on your final rule).
+
+Win condition: Player reaches the end of the run with at least the minimum jug target collected.
+
+On either outcome, the Game Over Screen appears with:
+
+“GAME OVER” (red/alert or branded yellow).
+
+A motivational message: “Each jug helps bring clean water to families in need.”
+
+6. Reset/Replay
+
+On the Game Over Screen, a Play Again button is displayed.
+
+When tapped, the game resets:
+
+Timer is restored to full.
+
+Score/jug count resets to 0.
+
+Player is repositioned at the start of the level.

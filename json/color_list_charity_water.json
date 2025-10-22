@@ -1,0 +1,17 @@
+{
+  "colors": {
+    "blue_water": "#2E9DF7",
+    "yellow_jerrycan": "#FFC907",
+    "teal": "#8BD1CB",
+    "green": "#4FCB53",
+    "orange": "#FF902A",
+    "red": "#F5402C",
+    "deep_green": "#159A48",
+    "coral": "#F16061",
+    "pipeline_pink": "#F94F5E",
+    "pipeline_yellow": "#FFDA48",
+    "pipeline_teal": "#3FBFBB",
+    "pipeline_bluegray": "#28403F",
+    "pipeline_sand": "#F3CC98"
+  }
+}
